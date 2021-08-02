@@ -1,0 +1,18 @@
+<%-include("partials/header");-%>
+<h1>Home</h1>
+<p><%=startingContent%></p>
+<% posts.forEach(function(i,j){ %>
+	<div class="newPost">
+
+		<h1><%= i.title %></h1>
+
+		<p><%= i.content.substring(0,50)+" ..." %> <a href="/posts/<%= i.title.replace(/ /g,"_") %>">read more</a></p>
+	</div>
+
+<% }) %>
+
+
+<%-include("partials/footer");-%>
+
+
+	
