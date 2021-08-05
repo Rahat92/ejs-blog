@@ -3,9 +3,9 @@ const bodyParser = require("body-parser");
 const _ = require('lodash');
 const app = express();
 let posts = [];
-const homeStartingContent = "This is home page paragraph";
-const aboutContent = "This is the about content";
-const contactContent = "This is the contact content";
+const homeStartingContent = "THIS IS HOME PAGE";
+const aboutContent = "THIS IS ABOUT PAGE";
+const contactContent = "THIS IS CONTACT PAGE";
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public/bootstrap"));
 app.use(express.static("public/css"));
@@ -30,12 +30,16 @@ app.get("/compose",function(req,res){
 app.post("/compose",function(req,res){
 	const post = {
 		title:req.body.postTitle,
-		content:req.body.postBody
-
+		content:req.body.postBody,
+		name:req.body.name
 	};
-	posts.push(post)
+	posts.push(post);
+	if(post.content.length>0&&post.title.length>0){
+		res.redirect("/");
+	}else{
+		res.redirect("/compose");
+	}
 	
-	res.redirect("/");
 });
 
 app.get("/posts/:postName",function(req,res){
@@ -44,7 +48,7 @@ app.get("/posts/:postName",function(req,res){
 		const storedTitle = _.lowerCase(post.title);
 		if(storedTitle === requestedTitle){
 			
-			res.render("post",{title:post.title,content:post.content})
+			res.render("post",{title:post.title,content:post.content,postedBy:post.name})
 		}
 		
 

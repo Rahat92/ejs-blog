@@ -4,15 +4,13 @@
 <% posts.forEach(function(i,j){ %>
 	<div class="newPost">
 
-		<h1><%= i.title %></h1>
+		<h1 style="color: green;"><%= i.title %> <sub style="font-size: 10px;color:white;background: black; padding: 1px; border-radius: 2px;">Posted by:<%=i.name%></sub></h1>
 
-		<p><%= i.content.substring(0,50)+" ..." %> <a href="/posts/<%= i.title.replace(/ /g,"_") %>">read more</a></p>
+		<p><%= i.content.substring(0,100)+" ..." %> <a href="/posts/<%= i.title.replace(/ /g,"_") %>">read more</a></p>
 	</div>
 
 <% }) %>
 
-
 <%-include("partials/footer");-%>
 
 
-	
